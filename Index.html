@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#635bff">
+<title>ShopVerse All-in-One</title>
+<style>
+*{box-sizing:border-box}
+:root{--p:#635bff;--bg:#f5f6fc;--ink:#20243a;--muted:#737991;--card:#fff}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,#635bff,#8b5cf6);color:white;padding:20px 16px 24px;border-radius:0 0 25px 25px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-size:22px;font-weight:900}
+.pill{background:#ffffff24;padding:8px 12px;border-radius:30px;font-size:12px}
+header h1{font-size:26px;margin:22px 0 8px}
+header p{font-size:13px;line-height:1.6;margin:0;color:#eeedff}
+main{max-width:900px;margin:auto;padding:16px 14px 90px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}
+.tab{border:0;background:white;padding:12px 4px;border-radius:13px;font-weight:bold;color:#686b82;font-size:12px}
+.tab.active{background:var(--p);color:white}
+.page{display:none}.page.active{display:block}
+h2{font-size:21px;margin:12px 0}
+h3{font-size:16px;margin:0 0 8px}
+.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:var(--card);border-radius:17px;padding:14px;box-shadow:0 4px 18px #20243a0b;margin-bottom:12px;min-width:0}
+.hero{background:linear-gradient(130deg,#e8e7ff,#f7e9ff);padding:20px;border-radius:19px;margin-bottom:18px}
+.hero h2{margin:0 0 7px}
+.emoji{font-size:38px;margin-bottom:10px}
+.price{font-weight:900;font-size:17px;margin:10px 0}
+.old{color:#999;text-decoration:line-through;font-size:12px;margin-left:5px}
+button{cursor:pointer;font-family:inherit}
+.btn{border:0;background:var(--p);color:white;padding:11px 13px;border-radius:11px;font-weight:bold;font-size:13px}
+.btn.light{background:#eeedff;color:var(--p)}
+.btn.dark{background:#22243a}
+.btn.red{background:#fff0f0;color:#c33}
+.btn.full{width:100%}
+input,select,textarea{width:100%;padding:12px;border:1px solid #e3e5ef;border-radius:11px;font:inherit;margin:5px 0 12px;background:white;color:var(--ink)}
+label{font-size:12px;font-weight:bold}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.stat{padding:16px;border-radius:15px;background:white;box-shadow:0 3px 12px #00000008}
+.stat strong{display:block;font-size:21px;margin-top:7px;overflow-wrap:anywhere}
+.stat small{color:var(--muted)}
+.moneygrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.green{color:#159767}.redtext{color:#d44343}
+.item{padding:12px 0;border-bottom:1px solid #eeeef5}
+.item:last-child{border:0}
+.tag{font-size:11px;background:#eeedff;color:var(--p);border-radius:20px;padding:5px 8px}
+.empty{text-align:center;padding:24px 10px;color:var(--muted);font-size:13px}
+footer{text-align:center;font-size:11px;color:#85899b;padding:20px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}header{padding-left:max(20px,calc((100% - 870px)/2));padding-right:max(20px,calc((100% - 870px)/2))}}
+</style>
+</head>
+<body>
+<header>
+ <div class="top">
+  <div class="logo">✦ ShopVerse</div>
+  <div class="pill">ALL-IN-ONE APP</div>
+ </div>
+ <h1>Everything you need.<br>One simple app.</h1>
+ <p>Shop products · Book services · Manage your money</p>
+</header>
+
+<main>
+ <nav class="tabs">
+  <button class="tab active" data-page="home">🏠 Home</button>
+  <button class="tab" data-page="shop">🛍️ Shop</button>
+  <button class="tab" data-page="services">🧰 Services</button>
+  <button class="tab" data-page="money">💰 Money</button>
+ </nav>
+
+ <section id="home" class="page active">
+  <div class="hero">
+   <span class="tag">WELCOME TO SHOPVERSE</span>
+   <h2 style="margin-top:14px">Your world, in one place.</h2>
+   <p class="muted">Shop your favourites, book trusted services and keep track of your spending.</p>
+   <button class="btn" onclick="showPage('shop')">Start shopping →</button>
+  </div>
+  <h2>Explore everything</h2>
+  <div class="grid">
+   <div class="card"><div class="emoji">🛍️</div><h3>Shopping</h3><p class="muted">Products and cart</p><button class="btn light full" onclick="showPage('shop')">Explore shop</button></div>
+   <div class="card"><div class="emoji">🛠️</div><h3>Home services</h3><p class="muted">Book local services</p><button class="btn light full" onclick="showPage('services')">Book service</button></div>
+   <div class="card"><div class="emoji">📊</div><h3>Money tracker</h3><p class="muted">Track your budget</p><button class="btn light full" onclick="showPage('money')">View money</button></div>
+  </div>
+  <h2>Your overview</h2>
+  <div class="moneygrid">
+   <div class="stat"><small>Cart items</small><strong id="homeCart">0</strong></div>
+   <div class="stat"><small>Bookings</small><strong id="homeBookings">0</strong></div>
+   <div class="stat"><small>Income</small><strong id="homeIncome">₹0</strong></div>
+   <div class="stat"><small>Expenses</small><strong id="homeExpense">₹0</strong></div>
+  </div>
+ </section>
+
+ <section id="shop" class="page">
+  <h2>🛍️ Shopping Mall</h2>
+  <input id="search" placeholder="Search products..." oninput="renderProducts()">
+  <select id="category" onchange="renderProducts()">
+   <option value="All">All categories</option>
+   <option>Fashion</option><option>Electronics</option><option>Home</option><option>Beauty</option><option>Food</option>
+  </select>
+  <div class="row"><h3>Products</h3><span class="muted" id="productCount"></span></div>
+  <div class="grid" id="products"></div>
+  <h2>❤️ Wishlist</h2><div id="wishlist"></div>
+  <h2>🛒 Your cart</h2><div class="card" id="cart"></div>
+  <div class="card">
+   <h3>Demo checkout</h3>
+   <p class="muted">Fill in your details to save a sample order on this device.</p>
+   <label>Your name</label><input id="buyer" placeholder="Enter name">
+   <label>Delivery address</label><textarea id="address" placeholder="Enter address" rows="2"></textarea>
+   <div class="row"><strong>Total: <span id="cartTotal">₹0</span></strong><button class="btn" onclick="checkout()">Place demo order</button></div>
+  </div>
+  <h2>Recent orders</h2><div class="card" id="orders"></div>
+ </section>
+
+ <section id="services" class="page">
+  <h2>🧰 QuickHelp Services</h2>
+  <p class="muted">Choose a service and save a demo booking.</p>
+  <div class="grid" id="serviceList"></div>
+  <h2>Book a service</h2>
+  <div class="card">
+   <label>Selected service</label><input id="serviceName" readonly placeholder="Choose a service above">
+   <label>Your name</label><input id="serviceCustomer" placeholder="Your name">
+   <label>Phone number</label><input id="servicePhone" type="tel" placeholder="Your phone number">
+   <label>Service address</label><textarea id="serviceAddress" rows="2" placeholder="Where do you need help?"></textarea>
+   <label>Preferred date</label><input id="serviceDate" type="date">
+   <button class="btn full" onclick="bookService()">Confirm demo booking</button>
+  </div>
+  <h2>Your bookings</h2><div class="card" id="bookings"></div>
+ </section>
+
+ <section id="money" class="page">
+  <h2>💰 MoneyTrack</h2>
+  <p class="muted">Record income and expenses to understand your budget.</p>
+  <div class="moneygrid">
+   <div class="stat"><small>Total income</small><strong class="green" id="income">₹0</strong></div>
+   <div class="stat"><small>Total expenses</small><strong class="redtext" id="expense">₹0</strong></div>
+   <div class="stat" style="grid-column:1/-1"><small>Available balance</small><strong id="balance">₹0</strong></div>
+  </div>
+  <h2 style="margin-top:22px">Add transaction</h2>
+  <div class="card">
+   <label>Type</label><select id="txType"><option value="expense">Expense</option><option value="income">Income</option></select>
+   <label>Amount (₹)</label><input id="txAmount" type="number" min="1" placeholder="e.g. 500">
+   <label>Category</label><select id="txCategory"><option>Food</option><option>Shopping</option><option>Travel</option><option>Salary</option><option>Home</option><option>Other</option></select>
+   <label>Note</label><input id="txNote" placeholder="What was it for?">
+   <button class="btn full" onclick="addTransaction()">Save transaction</button>
+  </div>
+  <div class="row"><h2>History</h2><button class="btn red" onclick="clearTransactions()">Clear history</button></div>
+  <div class="card" id="transactions"></div>
+ </section>
+ <footer>ShopVerse All-in-One · Simple demo app<br>Your data stays in this browser on this device.</footer>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+function read(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch(e){return fallback}}
+function save(){localStorage.setItem("sv_cart",JSON.stringify(cart));localStorage.setItem("sv_wish",JSON.stringify(wish));localStorage.setItem("sv_orders",JSON.stringify(orders));localStorage.setItem("sv_bookings",JSON.stringify(bookings));localStorage.setItem("sv_txs",JSON.stringify(txs))}
+let cart=read("sv_cart",[]),wish=read("sv_wish",[]),orders=read("sv_orders",[]),bookings=read("sv_bookings",[]),txs=read("sv_txs",[]);
+const products=[
+{id:1,name:"Classic T-Shirt",cat:"Fashion",price:499,icon:"👕"},
+{id:2,name:"Everyday Sneakers",cat:"Fashion",price:1299,icon:"👟"},
+{id:3,name:"Wireless Earbuds",cat:"Electronics",price:999,icon:"🎧"},
+{id:4,name:"Smart Watch",cat:"Electronics",price:1799,icon:"⌚"},
+{id:5,name:"Skin Care Kit",cat:"Beauty",price:599,icon:"🧴"},
+{id:6,name:"Coffee Mug",cat:"Home",price:249,icon:"☕"},
+{id:7,name:"Travel Backpack",cat:"Fashion",price:899,icon:"🎒"},
+{id:8,name:"Bluetooth Speaker",cat:"Electronics",price:1499,icon:"🔊"},
+{id:9,name:"Home Decor Lamp",cat:"Home",price:799,icon:"💡"},
+{id:10,name:"Healthy Snack Box",cat:"Food",price:349,icon:"🍱"}
+];
+const services=[
+{name:"Electrician",icon:"⚡",price:299,desc:"Electrical repairs"},
+{name:"Plumber",icon:"🔧",price:249,desc:"Leaks and fittings"},
+{name:"Home Cleaning",icon:"🧹",price:499,desc:"Room cleaning"},
+{name:"AC Repair",icon:"❄️",price:399,desc:"AC inspection"},
+{name:"Beauty Service",icon:"💅",price:349,desc:"At-home grooming"},
+{name:"Computer Help",icon:"💻",price:299,desc:"Basic tech support"}
+];
+function money(n){return "₹"+Number(n||0).toLocaleString("en-IN")}
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo({top:0,behavior:"smooth"});renderAll()}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+function renderProducts(){
+ let q=$("search").value.toLowerCase(),c=$("category").value;
+ let list=products.filter(p=>(c==="All"||p.cat===c)&&(p.name+" "+p.cat).toLowerCase().includes(q));
+ $("productCount").textContent=list.length+" items";
+ $("products").innerHTML=list.map(p=>`<div class="card"><div class="emoji">${p.icon}</div><span class="tag">${p.cat}</span><h3 style="margin-top:10px">${p.name}</h3><div class="price">${money(p.price)}</div><div class="row"><button class="btn" onclick="addCart(${p.id})">Add to cart</button><button class="btn light" onclick="toggleWish(${p.id})">${wish.includes(p.id)?"❤️":"♡"}</button></div></div>`).join("")||'<div class="empty">No products found.</div>';
+ $("wishlist").innerHTML=wish.map(id=>{let p=products.find(x=>x.id===id);return p?`<div class="item row"><span>${p.icon} ${p.name} · ${money(p.price)}</span><button class="btn light" onclick="addCart(${p.id})">Add</button></div>`:""}).join("")||'<div class="empty">Your wishlist is empty.</div>';
+}
+function addCart(id){let x=cart.find(p=>p.id===id);if(x)x.qty++;else cart.push({id,qty:1});save();renderAll()}
+function toggleWish(id){wish=wish.includes(id)?wish.filter(x=>x!==id):[...wish,id];save();renderAll()}
+function changeQty(id,n){let x=cart.find(p=>p.id===id);if(x)x.qty+=n;cart=cart.filter(p=>p.qty>0);save();renderAll()}
+function renderCart(){
+ let total=0;
+ $("cart").innerHTML=cart.map(x=>{let p=products.find(a=>a.id===x.id);if(!p)return"";total+=p.price*x.qty;return `<div class="item row"><div><b>${p.icon} ${p.name}</b><div class="muted">${money(p.price)} each</div></div><div class="row"><button class="btn light" onclick="changeQty(${p.id},-1)">−</button><b>${x.qty}</b><button class="btn light" onclick="changeQty(${p.id},1)">+</button></div></div>`}).join("")||'<div class="empty">Cart is empty. Add a product first.</div>';
+ $("cartTotal").textContent=money(total);
+}
+function checkout(){
+ if(!cart.length)return alert("Please add products to your cart first.");
+ if(!$("buyer").value.trim()||!$("address").value.trim())return alert("Enter your name and address.");
+ let total=cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0);
+ orders.unshift({id:Date.now(),name:$("buyer").value.trim(),total,date:new Date().toLocaleDateString("en-IN"),status:"Demo order"});
+ cart=[];save();renderAll();alert("Demo order saved! No payment was taken.");
+}
+function renderOrders(){$("orders").innerHTML=orders.map(o=>`<div class="item"><b>Order #${String(o.id).slice(-6)}</b><div class="muted">${o.date} · ${o.name}</div><div class="row"><strong>${money(o.total)}</strong><span class="tag">${o.status}</span></div></div>`).join("")||'<div class="empty">No orders yet.</div>'}
+function renderServices(){
+ $("serviceList").innerHTML=services.map((s,i)=>`<div class="card"><div class="emoji">${s.icon}</div><h3>${s.name}</h3><p class="muted">${s.desc}</p><div class="price">From ${money(s.price)}</div><button class="btn full" onclick="selectService(${i})">Book service</button></div>`).join("");
+}
+function selectService(i){$("serviceName").value=services[i].name;showPage("services");$("serviceName").value=services[i].name;$("serviceName").scrollIntoView({behavior:"smooth",block:"center"})}
+function bookService(){
+ let name=$("serviceName").value,customer=$("serviceCustomer").value.trim(),phone=$("servicePhone").value.trim(),address=$("serviceAddress").value.trim(),date=$("serviceDate").value;
+ if(!name)return alert("Choose a service first.");
+ if(!customer||!phone||!address||!date)return alert("Please complete all booking fields.");
+ bookings.unshift({id:Date.now(),name,customer,phone,address,date,status:"Demo booking"});
+ save();renderAll();alert("Demo booking saved on this device.");
+}
+function renderBookings(){$("bookings").innerHTML=bookings.map(b=>`<div class="item"><div class="row"><b>${b.name}</b><span class="tag">${b.status}</span></div><div class="muted">${b.customer} · ${b.date}</div><div class="muted">${b.address}</div></div>`).join("")||'<div class="empty">No bookings yet.</div>'}
+function addTransaction(){
+ let type=$("txType").value,amount=Number($("txAmount").value),category=$("txCategory").value,note=$("txNote").value.trim();
+ if(!Number.isFinite(amount)||amount<=0)return alert("Enter a valid amount.");
+ txs.unshift({id:Date.now(),type,amount,category,note,date:new Date().toLocaleDateString("en-IN")});
+ $("txAmount").value="";$("txNote").value="";save();renderAll();
+}
+function removeTx(id){txs=txs.filter(t=>t.id!==id);save();renderAll()}
+function clearTransactions(){if(confirm("Delete all money transactions?")){txs=[];save();renderAll()}}
+function renderMoney(){
+ let income=txs.filter(t=>t.type==="income").reduce((s,t)=>s+t.amount,0),expense=txs.filter(t=>t.type==="expense").reduce((s,t)=>s+t.amount,0);
+ $("income").textContent=money(income);$("expense").textContent=money(expense);$("balance").textContent=money(income-expense);
+ $("homeIncome").textContent=money(income);$("homeExpense").textContent=money(expense);
+ $("transactions").innerHTML=txs.map(t=>`<div class="item row"><div><b>${t.category}</b><div class="muted">${t.date}${t.note?" · "+t.note:""}</div></div><div style="text-align:right"><b class="${t.type==="income"?"green":"redtext"}">${t.type==="income"?"+":"−"}${money(t.amount)}</b><br><button class="btn light" style="padding:5px 8px;margin-top:5px" onclick="removeTx(${t.id})">Delete</button></div></div>`).join("")||'<div class="empty">No transactions yet.</div>';
+}
+function renderAll(){renderProducts();renderCart();renderOrders();renderServices();renderBookings();renderMoney();$("homeCart").textContent=cart.reduce((s,x)=>s+x.qty,0);$("homeBookings").textContent=bookings.length}
+renderAll();
+</script>
+</body>
+</html>
